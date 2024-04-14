@@ -1,0 +1,30 @@
+{
+  "name": "toon-boom-discord-integration",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c rollup.config.mjs"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.12.7",
+    "prettier": "^3.2.5",
+    "rollup-plugin-polyfill-node": "^0.13.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "acorn": "^8.11.3",
+    "astring": "^1.8.6",
+    "core-js": "^3.36.1",
+    "estree-walker": "^3.0.3",
+    "form-urlencoded": "^6.1.4",
+    "rollup": "^4.14.1",
+    "setprototypeof": "^1.2.0",
+    "typedarray": "^0.0.7",
+    "uuid": "^9.0.1"
+  }
+}

@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"noImplicitAny": false,
+		"module": "ES2022",
+		"target": "ES3",
+		"allowJs": true,
+		"strict": false,
+		"esModuleInterop": true,
+		"ignoreDeprecations": "5.0",
+		"moduleResolution": "Node",
+		"typeRoots": ["./src/typings"],
+		"outDir": "dist",
+		"baseUrl": ".",
+		"lib": ["ES5"],
+    "paths": {
+     "uuid/dist/commonjs-browser": ["node_modules/uuid/dist/commonjs-browser/index.js"] 
+    }
+	},
+	"include": [
+		"src",
+		"node_modules/typedarray",
+		"node_modules/core-js/full/function",
+    "node_modules/core-js/full/typed-array",
+    "node_modules/form-urlencoded"
+	]
+}
