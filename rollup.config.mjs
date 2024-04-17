@@ -16,7 +16,7 @@ export default defineConfig([
 	{
 		input: "src/main.ts",
 		output: {
-			file: `${process.env.HOME}/Desktop/ART/Animation/zzz-sandbox/sandbox1/scripts/bundle.js`,
+			file: `dist/Bundle.js`,
 			format: "esm", // immediately-invoked function expression — suitable for <script> tags
 			sourcemap: false,
 			preserveModules: false,
@@ -133,7 +133,7 @@ export default defineConfig([
 	},
 	{
 		output: {
-			file: `${process.env.HOME}/Desktop/ART/Animation/zzz-sandbox/sandbox1/scripts/bundle.js`,
+			file: `dist/bundle.js`,
 			sourcemap: false,
 			preserveModules: false,
 			interop: "auto",
@@ -142,7 +142,7 @@ export default defineConfig([
 		},
 		context: "this",
 		treeshake: false,
-		input: `${process.env.HOME}/Desktop/ART/Animation/zzz-sandbox/sandbox1/scripts/bundle.js`,
+		input: `dist/Bundle.js`,
 		plugins: [keywordTransform(), varTransform(), globalTransform()],
 	},
 ]);
