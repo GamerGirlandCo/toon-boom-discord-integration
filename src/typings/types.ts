@@ -40,3 +40,15 @@ interface Meta extends BaseMetadata {
 	type: "string" | "int" | "bool" | string;
 }
 export type StoryboardMetadata = Meta | HiddenInfoField;
+
+export interface HarmonyCache {
+	layoutExport: LayoutExport;
+	frameFile: QFile;
+	url?: string;
+}
+export interface StoryboardCache {
+	exporter: ExportManager;
+	frameFile: QFile;
+	lastScene?: string;
+	url?: string;
+}
