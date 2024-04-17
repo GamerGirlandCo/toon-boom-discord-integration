@@ -125,7 +125,18 @@ declare global {
 		public close(): void;
 		public readAll(): QByteArray;
 		public write(bytes: QByteArray): void;
+		public rename(newName: string): boolean;
+		public remove(): boolean;
 		// copy,exists,fileName,link,remove,rename,resize,setFileName,symLinkTarget,atEnd,bytesAvailable,bytesToWrite,canReadLine,close,errorString,getChar,isOpen,isReadable,isSequential,isTextModeEnabled,isWritable,open,openMode,peek,pos,putChar,read,readAll,readLine,reset,seek,setTextModeEnabled,size,ungetChar,waitForBytesWritten,waitForReadyRead,write
+	}
+	class QDir {
+		constructor(dirName: string);
+		public entryList(): string[];
+		public setNameFilters(filters: string[]): void;
+		public setSorting(flags: number): void;
+		public path(): string;
+		public static readonly Time: number;
+		public static readonly Reversed: number;
 	}
 	class QIODevice {
 		public static readonly ReadOnly: unknown;
@@ -198,6 +209,9 @@ declare global {
 		currentScene(): string;
 		currentResolutionX(): number;
 		currentResolutionY(): number;
+	}
+	const preferences: {
+		getInt(pref: string, def: number): number;
 	}
 	const frame: {
 		current(): number;
