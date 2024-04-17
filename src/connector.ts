@@ -1,10 +1,9 @@
 import { Buffer } from "./modules/buffer";
 import formEncode from "./modules/form-encode";
 import {
-	m_fromByteArray,
-	stringToByteArray,
-	m_toByteArray,
 	rand,
+	pad,
+	trimDir,
 } from "./utils";
 import { DiscordMessage } from "./typings/types";
 export class DiscordConnector {
@@ -78,13 +77,11 @@ export class DiscordConnector {
 			DiscordConnector.log("debug", "empty JSON");
 			return {};
 		}
-		let rawOp = stringToByteArray(
-			this.codec.toUnicode(header.mid(0, 4).trimmed().toHex())
-		);
+		let rawOp = this.codec.toUnicode(header.mid(0, 4).trimmed().toHex())
 		let bdata = this.readBytes(this.socket.bytesAvailable());
 		let data = JSON.parse(this.codec.toUnicode(bdata));
 		let mheader: DiscordMessage = {
-			op: m_fromByteArray(rawOp),
+			op: Buffer.fromHex(rawOp),
 			...data,
 		};
 		return mheader;
