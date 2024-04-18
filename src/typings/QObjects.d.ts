@@ -178,9 +178,13 @@ declare global {
 		applicationPid(): number;
 	};
 	class ExportManager {
-		public exportLayout(dir: string, file: string, format: "jpg" | "png" | "tga" | "psd");
+		public exportLayout(dir: string, file: string, format: "jpg" | "png" | "tga" | "psd"): boolean;
+		public exportToBitmap(dir: string, file: string, format: "jpg" | "png" | "tga" | "psd"): boolean;
 		public setSelectedPanels(pan: Panel[]): void;
-		public setExportResolution(x: number, y: number): void
+		public setExportResolution(x: number, y: number): void;
+		public setUseCurrentPanel(val: boolean): void;
+		public setBitmapFitCameraPath(val: boolean): void;
+		public setBitmapRectifyStatic(val: boolean): void;
 	}
 	const project: {
 		currentProjectPath(): string
