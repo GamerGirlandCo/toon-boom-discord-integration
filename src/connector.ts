@@ -1,10 +1,5 @@
 import { Buffer } from "./modules/buffer";
-import formEncode from "./modules/form-encode";
-import {
-	rand,
-	pad,
-	trimDir,
-} from "./utils";
+import { trimDir } from "./utils";
 import { DiscordMessage, HarmonyCache, StoryboardCache } from "./typings/types";
 export class DiscordConnector {
 	readonly scopes: string[] = ["rpc", "identify"];
@@ -91,7 +86,7 @@ export class DiscordConnector {
 			DiscordConnector.log("debug", "empty JSON");
 			return {};
 		}
-		let rawOp = this.codec.toUnicode(header.mid(0, 4).trimmed().toHex())
+		let rawOp = this.codec.toUnicode(header.mid(0, 4).trimmed().toHex());
 		let bdata = this.readBytes(this.socket.bytesAvailable());
 		let data = JSON.parse(this.codec.toUnicode(bdata));
 		let mheader: DiscordMessage = {
@@ -189,25 +184,29 @@ export class DiscordConnector {
 		if (scene != this.sCache.lastScene) {
 			this.startTime = Date.now();
 			this.sCache.lastScene = scene;
-			this.sCache.exporter.setSelectedPanels([curSel.getPanelSelection()[0]]);
+			this.sCache.exporter.setUseCurrentPanel(true);
+			this.sCache.exporter.setBitmapRectifyStatic(true);
+			this.sCache.exporter.setBitmapFitCameraPath(false)
 			this.sCache.exporter.setExportResolution(
 				project.currentResolutionX(),
 				project.currentResolutionY()
 			);
-			this.sCache.exporter.exportLayout(
+			this.sCache.exporter.exportToBitmap(
 				project.currentProjectPath(),
 				".frame.png",
 				"png"
 			);
 			let dir = new QDir(project.currentProjectPath());
 			dir.setNameFilters([".frame*"]);
-			dir.setSorting(QDir.Reversed | QDir.Time);
+			dir.setSorting(QDir.Time);
+			
 			let frameFile = new QFile(
 				`${project.currentProjectPath()}/${dir.entryList()[0]}`
 			);
-			trimDir(dir);
-			frameFile.rename(".frame.png");
-			if (frameFile != this.sCache.frameFile) {
+
+			(new QFile(project.currentProjectPath() + "/.frame.png")).remove()
+			frameFile.rename(project.currentProjectPath() + "/.frame.png");
+			if (frameFile != this.sCache.frameFile && dir.entryList()[0] != undefined) {
 				this.sCache.frameFile = frameFile;
 				this.sCache.url = this.uploadFile(this.sCache.frameFile);
 			}
